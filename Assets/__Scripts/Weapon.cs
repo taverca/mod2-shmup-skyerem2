@@ -80,7 +80,12 @@ public class Weapon : MonoBehaviour
 
         // Find the fireEvent of a Hero Component in the parent hierarchy
         Hero hero = GetComponentInParent<Hero>();                              // e
-        if (hero != null) hero.fireEvent += Fire;
+        if (hero != null) {
+            hero.fireEvent += Fire;
+    } else {
+        Hero2 myhero = GetComponentInParent<Hero2>();
+         if (myhero != null) myhero.fireEvent += Fire;
+    }
     }
 
     public eWeaponType type

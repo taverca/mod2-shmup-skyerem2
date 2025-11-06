@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
+
     [Header("Inscribed")]
     public float rotationsPerSecond = 0.1f;
 
     [Header("Dynamic")]
     public int levelShown = 0; // This is set between lines // c & d
 
+    public GameObject myHero; 
     // This non-public variable will not appear in the Inspector
     Material mat;                                                             // a
 
@@ -21,7 +23,22 @@ public class Shield : MonoBehaviour
     void Update()
     {
         // Read the current shield level from the Hero Singleton
-        int currLevel = Mathf.FloorToInt(Hero.S.shieldLevel);               // c
+        
+      Hero hero1 = myHero.GetComponent<Hero>();
+      Hero2 hero2 = myHero.GetComponent<Hero2>();
+      float shieldLevel = 0;
+
+          if (hero1 == null)
+        {
+            shieldLevel = hero2.shieldLevel;
+        }
+        else
+        {
+            shieldLevel = hero1.shieldLevel;
+        }
+
+        int currLevel = Mathf.FloorToInt(shieldLevel);   
+            // c
                                                                             // If this is different from levelShown...
         if (levelShown != currLevel)
         {

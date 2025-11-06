@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class Hero2 : MonoBehaviour
 {
 
-    static public Hero S { get; private set; }  // Singleton property    // a
+    static public Hero2 S { get; private set; }  // Singleton property    // a
 
     [Header("Inscribed")]
     // These fields control the movement of the ship
@@ -15,8 +15,7 @@ public class Hero : MonoBehaviour
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
-    public GameObject controller; 
-
+    public GameObject controller;
     [Header("Dynamic")]
     [Range(0, 4)]
     [SerializeField]                                        // b
@@ -33,6 +32,7 @@ public class Hero : MonoBehaviour
 
     void Awake()
     {
+        controller = GameObject.Find("Main Camera");
         if (S == null)
         {
             S = this; // Set the Singleton only if it’s null                  // c
@@ -50,10 +50,19 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
-        // Pull in information from the Input class
-        float hAxis = Input.GetAxis("Horizontal");                            // d
-        float vAxis = Input.GetAxis("Vertical");                              // d
 
+        float hAxis = 0; 
+        float vAxis = 0; 
+
+        if (Input.GetKey(KeyCode.RightArrow)){
+             hAxis = 1;
+        }  else if (Input.GetKey(KeyCode.LeftArrow)){
+             hAxis = -1; 
+        } else if (Input.GetKey(KeyCode.UpArrow)){
+             vAxis = 1; 
+        } else if (Input.GetKey(KeyCode.DownArrow)){
+             vAxis = -1;
+        }
         // Change transform.position based on the axes
         Vector3 pos = transform.position;
         pos.x += hAxis * speed * Time.deltaTime;
@@ -70,7 +79,7 @@ public class Hero : MonoBehaviour
         //}
 
         // Use the fireEvent to fire Weapons when the Spacebar is pressed.
-        if (Input.GetAxis("Jump") == 1 && fireEvent != null)
+        if (Input.GetKey(KeyCode.Keypad0) && fireEvent != null)
         {
             fireEvent();
         }
@@ -124,8 +133,8 @@ public class Hero : MonoBehaviour
     {
         get { return (_shieldLevel); }                                      // b
         private set
-        {          
-            Main conscript = controller.GetComponent<Main>();                                               // c
+        {                                                         // c
+          Main conscript = controller.GetComponent<Main>();                                               // c
             _shieldLevel = Mathf.Min(value, 4);                             // d
             // If the shield is going to be set to less than zero…
             if (value < 0)

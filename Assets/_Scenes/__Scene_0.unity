@@ -599,6 +599,7 @@ MonoBehaviour:
   - {fileID: 2103876059}
   - {fileID: 980067140}
   - {fileID: 781726980}
+  controller: {fileID: 963194225}
   _shieldLevel: 1
 --- !u!114 &930863984
 MonoBehaviour:
@@ -772,6 +773,9 @@ MonoBehaviour:
     delayBetweenShots: 0
     velocity: 50
   powerUpFrequency: 01000000010000000200000006000000
+  playerTwo: 0
+  prefabPlayer2: {fileID: 22979027711007673, guid: 4825fcd3080f88a41bf790b2de50e24f, type: 3}
+  Heroesleft: 1
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,6 +916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationsPerSecond: 0.1
   levelShown: 0
+  myHero: {fileID: 930863980}
 --- !u!135 &1583695809
 SphereCollider:
   m_ObjectHideFlags: 0

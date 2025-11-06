@@ -21,7 +21,10 @@ public class Main : MonoBehaviour
     public eWeaponType[] powerUpFrequency = new eWeaponType[] {        
                                      eWeaponType.blaster, eWeaponType.blaster,
                                      eWeaponType.spread,  eWeaponType.shield };
+    public bool playerTwo = false; 
+    public GameObject prefabPlayer2; 
     private BoundsCheck bndCheck;
+    public int Heroesleft = 1; 
 
     void Awake()
     {
@@ -86,6 +89,13 @@ public class Main : MonoBehaviour
         SceneManager.LoadScene("__Scene_0");                               // d
     }
 
+    void Update(){
+        if (Input.GetKey(KeyCode.Return) && playerTwo == false){
+            playerTwo = true; 
+            Heroesleft++;
+            Instantiate<GameObject>(prefabPlayer2);
+    }
+    }
     static public void HERO_DIED()
     {
         S.DelayedRestart();                                                  // b
